@@ -18,7 +18,7 @@ public class CertificateEntity {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id_certificate")
-    private DocumentEntity idDocument;  // ✅ coincide con mappedBy = "documento"
+    private DocumentEntity idDocument;
 
     @Enumerated(EnumType.STRING)
     private TypeCertificateEntity tipoCertificate;
