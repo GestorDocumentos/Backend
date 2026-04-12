@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 @Entity
-@Table(name = "certificates")
+@Table(name = "certificate")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,9 +18,10 @@ public class CertificateEntity {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id_certificate")
-    private DocumentEntity idDocument;
+    private DocumentEntity idDocument;  // ✅ coincide con mappedBy = "documento"
 
-    private String tipoCertificate;
+    @Enumerated(EnumType.STRING)
+    private TypeCertificateEntity tipoCertificate;
 
     private String sign;
 

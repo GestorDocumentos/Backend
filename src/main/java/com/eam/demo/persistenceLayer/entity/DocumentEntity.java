@@ -6,11 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "documents")
+@Table(name = "document")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,13 +23,17 @@ public class DocumentEntity {
     private LocalDate fecha;
 
     @Enumerated(EnumType.STRING)
-    private EstadoDocumento estado;
+    private DocumentStatusEntity estado;
 
     @ManyToOne
     @JoinColumn(name= "id_usuario")
     private UserEntity usuario;
 
-    @OneToOne(mappedBy = "documento", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "idDocument", cascade = CascadeType.ALL)
     private CertificateEntity certificate;
+
+
+
+
 
 }
