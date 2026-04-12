@@ -1,10 +1,7 @@
 package com.eam.demo.persistenceLayer.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 import java.util.List;
 
 @Entity
@@ -13,8 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUser;
 
     private String name;
@@ -22,21 +19,12 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserRolEntity> roles;
 
-    @OneToMany(mappedBy = "User", cascade = CascadeType.ALL)
-    private List<UserSubjectsEntity> subject;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserSubjectsEntity> subjects;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<DocumentEntity> document;
-
-
-
-
-
-
-
-
-
+    private List<DocumentEntity> documents;
 }
