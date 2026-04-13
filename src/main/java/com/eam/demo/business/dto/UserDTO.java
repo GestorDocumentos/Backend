@@ -17,6 +17,6 @@ public class UserDTO {
     @Schema(description = "Nombre del usuario", example = "Juan Perez", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 100)
     private String name;
 
-    @Schema(description = "Correo electronico del usuario", example = "juan.perez@docucloud.com", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 150)
+    @Schema(description = "Correo electronico del usuario", example = "juan.perez@eam.com", requiredMode = Schema.RequiredMode.REQUIRED, maxLength = 150)
     private String email;
 }

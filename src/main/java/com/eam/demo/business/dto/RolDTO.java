@@ -15,6 +15,6 @@ public class RolDTO {
     @Schema(description = "ID unico del rol", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long idRol;
 
-    @Schema(description = "Tipo de rol del sistema", example = "TEACHER", requiredMode = Schema.RequiredMode.REQUIRED)
+    @Schema(description = "Tipo de rol del sistema", example = "Maestro", requiredMode = Schema.RequiredMode.REQUIRED)
     private RolEntity.RolType rolType;
 }
