@@ -15,9 +15,9 @@ public class UserSubjectsEntity {
     @Id
     private String id ;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private UserEntity User;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "id_subject")
