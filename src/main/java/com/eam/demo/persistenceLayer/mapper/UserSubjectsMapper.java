@@ -23,7 +23,7 @@ public interface UserSubjectsMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "userId", source = "user.idUser")
-    @Mapping(target = "subjectId", source = "subject.id")
+    @Mapping(target = "subjectId", source = "subjects.id")
     @Mapping(target = "nota", source = "nota")
     UserSubjectsDTO toDTO(UserSubjectsEntity entity);
 

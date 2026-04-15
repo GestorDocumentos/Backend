@@ -21,7 +21,7 @@ public class UserSubjectsEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_subject")
-    private SubjectsEntity subject;
+    private SubjectsEntity subjects;
 
     private double nota;
 

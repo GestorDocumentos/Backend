@@ -17,7 +17,7 @@ public class CertificateEntity {
 
     @OneToOne
     @MapsId
-    @JoinColumn(name = "id_certificate")
+    @JoinColumn(name = "document_id")
     private DocumentEntity idDocument;
 
     @Enumerated(EnumType.STRING)
