@@ -20,7 +20,7 @@ public class SubjectsEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "subject")
+    @OneToMany(mappedBy = "subjects")
     private List<UserSubjectsEntity> users;
 
 }
