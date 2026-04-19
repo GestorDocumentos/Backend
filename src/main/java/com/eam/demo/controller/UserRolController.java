@@ -1,4 +1,4 @@
-package com.eam.demo.presentationLayer.controller;
+package com.eam.demo.controller;
 
 import com.eam.demo.business.dto.UserRolDTO;
 import com.eam.demo.business.service.UserRolService;
