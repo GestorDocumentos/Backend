@@ -32,13 +32,13 @@ public interface UserSubjectsMapper {
     @InheritInverseConfiguration(name = "toDTO")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "userId", qualifiedByName = "idToUser")
-    @Mapping(target = "subject", source = "subjectId", qualifiedByName = "idToSubject")
+    @Mapping(target = "subjects", source = "subjectId", qualifiedByName = "idToSubject")
     UserSubjectsEntity toEntity(UserSubjectsDTO dto);
 
     @InheritInverseConfiguration(name = "toDTO")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
-    @Mapping(target = "subject", ignore = true)
+    @Mapping(target = "subjects", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDTO(UserSubjectsDTO dto, @MappingTarget UserSubjectsEntity entity);
 

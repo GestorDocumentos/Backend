@@ -9,11 +9,13 @@ import com.eam.demo.persistenceLayer.repository.DocumentRepository;
 import com.eam.demo.persistenceLayer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class DocumentService {
 
     private final UserRepository userRepository;
@@ -23,6 +25,7 @@ public class DocumentService {
 
     private final PdfStudyGenerator studyGenerator;
     private final PdfGradesGenerator gradesGenerator;
+    private final PdfSubjectsGenerator subjectsGenerator;
 
     public byte[] process(Long userId,
                           RequestType requestType,
@@ -46,14 +49,21 @@ public class DocumentService {
             return generateBasicDocument(document);
         }
 
-        // 🔹 VALIDACIÓN
+// 🔹 VALIDACIÓN
         if (certificateType == null) {
             throw new IllegalArgumentException("Debe enviar el tipo de certificado");
         }
 
+// 🔥 VALIDACIÓN DE NOTAS (AQUÍ VA)
+        if ((certificateType == TypeCertificateEntity.NOTAS ||
+                certificateType == TypeCertificateEntity.MATERIAS) &&
+                (user.getSubjects() == null || user.getSubjects().isEmpty())) {
+            throw new RuntimeException("El usuario no tiene materias");
+        }
+
         // 3. Crear CERTIFICADO
         CertificateEntity certificate = new CertificateEntity();
-        certificate.setIdDocument(document);
+        certificate.setDocument(document);
         certificate.setTipoCertificate(certificateType);
         certificate.setFechaEmision(LocalDate.now());
         certificate.setSign("Firma Director");
@@ -65,6 +75,9 @@ public class DocumentService {
 
         // 5. GENERAR PDF
         switch (certificateType) {
+            case MATERIAS:
+                return subjectsGenerator.generate(reportDTO);
+
             case NOTAS:
                 return gradesGenerator.generate(reportDTO);
 

@@ -29,7 +29,7 @@ public class DocumentEntity {
     @JoinColumn(name= "id_usuario")
     private UserEntity usuario;
 
-    @OneToOne(mappedBy = "idDocument", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "document", cascade = CascadeType.ALL)
     private CertificateEntity certificate;
 
 

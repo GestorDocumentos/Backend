@@ -21,7 +21,7 @@ import java.util.List;
 public interface CertificateMapper {
 
     @Mapping(target = "idCertificate", source = "idCertificate")
-    @Mapping(target = "documentId", source = "idDocument.id")
+    @Mapping(target = "documentId", source = "document.id")
     @Mapping(target = "tipoCertificate", source = "tipoCertificate")
     @Mapping(target = "sign", source = "sign")
     @Mapping(target = "fechaEmision", source = "fechaEmision")
@@ -31,12 +31,12 @@ public interface CertificateMapper {
 
     @InheritInverseConfiguration(name = "toDTO")
     @Mapping(target = "idCertificate", ignore = true)
-    @Mapping(target = "idDocument", source = "documentId", qualifiedByName = "idToDocument")
+    @Mapping(target = "document", source = "documentId", qualifiedByName = "idToDocument")
     CertificateEntity toEntity(CertificateDTO dto);
 
     @InheritInverseConfiguration(name = "toDTO")
     @Mapping(target = "idCertificate", ignore = true)
-    @Mapping(target = "idDocument", ignore = true)
+    @Mapping(target = "document", ignore = true)
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateEntityFromDTO(CertificateDTO dto, @MappingTarget CertificateEntity entity);
 

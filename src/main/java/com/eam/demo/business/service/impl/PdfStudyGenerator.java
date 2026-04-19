@@ -14,6 +14,7 @@ import java.time.LocalDate;
 
 @Service
 public class PdfStudyGenerator {
+    private static final String DEFAULT_SIGNATURE = "Firma: Director Academico";
 
     public byte[] generate(UserReportDTO user) {
 
@@ -32,7 +33,7 @@ public class PdfStudyGenerator {
 
             document.add(new Paragraph(" "));
             document.add(new Paragraph("Fecha: " + LocalDate.now()));
-            document.add(new Paragraph("Firma: __________________"));
+            document.add(new Paragraph(DEFAULT_SIGNATURE));
 
             document.close();
 
@@ -55,7 +56,10 @@ public class PdfStudyGenerator {
 
             document.add(new Paragraph("DOCUMENTO GENERADO"));
             document.add(new Paragraph("ID: " + documentEntity.getId()));
+            document.add(new Paragraph("Estudiante: " + documentEntity.getUsuario().getName()));
+            document.add(new Paragraph("ID estudiante: " + documentEntity.getUsuario().getIdUser()));
             document.add(new Paragraph("Fecha: " + documentEntity.getFecha()));
+            document.add(new Paragraph(DEFAULT_SIGNATURE));
 
             document.close();
 

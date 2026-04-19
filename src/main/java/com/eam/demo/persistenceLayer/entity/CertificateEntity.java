@@ -13,12 +13,13 @@ import java.time.LocalDate;
 public class CertificateEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_certificate")
     private long idCertificate;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "document_id")
-    private DocumentEntity idDocument;
+    private DocumentEntity document;
 
     @Enumerated(EnumType.STRING)
     private TypeCertificateEntity tipoCertificate;

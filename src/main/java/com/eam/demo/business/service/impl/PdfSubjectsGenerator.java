@@ -1,6 +1,5 @@
 package com.eam.demo.business.service.impl;
 
-
 import com.eam.demo.business.dto.SubjectReportDTO;
 import com.eam.demo.business.dto.UserReportDTO;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -11,9 +10,10 @@ import com.itextpdf.layout.element.Table;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDate;
 
 @Service
-public class PdfGradesGenerator {
+public class PdfSubjectsGenerator {
     private static final String DEFAULT_SIGNATURE = "Firma: Director Academico";
 
     public byte[] generate(UserReportDTO user) {
@@ -25,22 +25,25 @@ public class PdfGradesGenerator {
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
 
-            document.add(new Paragraph("CERTIFICADO DE NOTAS"));
-            document.add(new Paragraph("Estudiante: " + user.getName()));
-            document.add(new Paragraph("ID: " + user.getIdUser()));
+            document.add(new Paragraph("CERTIFICADO DE MATERIAS"));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph("Se certifica que el estudiante: " + user.getName()));
+            document.add(new Paragraph("Identificado con ID: " + user.getIdUser()));
+            document.add(new Paragraph("Tiene registradas las siguientes materias:"));
+            document.add(new Paragraph(" "));
 
-            Table table = new Table(2);
+            Table table = new Table(1);
             table.addCell("Materia");
-            table.addCell("Nota");
 
-            for (SubjectReportDTO s : user.getSubjects()) {
-                table.addCell(s.getSubjectName());
-                table.addCell(String.valueOf(s.getNota()));
+            for (SubjectReportDTO subject : user.getSubjects()) {
+                table.addCell(subject.getSubjectName());
             }
 
             document.add(table);
             document.add(new Paragraph(" "));
+            document.add(new Paragraph("Fecha: " + LocalDate.now()));
             document.add(new Paragraph(DEFAULT_SIGNATURE));
+
             document.close();
 
         } catch (Exception e) {
