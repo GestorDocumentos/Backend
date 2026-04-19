@@ -6,6 +6,7 @@ import com.eam.demo.persistenceLayer.dao.UserDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,13 +17,42 @@ public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
     private final PasswordEncoder passwordEncoder;
 
-    @Override public List<UserDTO> getAll() { return userDAO.findAll(); }
-    @Override public Optional<UserDTO> getById(Long id) { return userDAO.findById(id); }
-    @Override public Optional<UserDTO> getByEmail(String email) { return userDAO.findByEmail(email); }
-    @Override public UserDTO create(UserDTO dto) { encodePasswordIfPresent(dto); return userDAO.save(dto); }
-    @Override public Optional<UserDTO> update(Long id, UserDTO dto) { encodePasswordIfPresent(dto); return userDAO.update(id, dto); }
-    @Override public boolean delete(Long id) { return userDAO.deleteById(id); }
-    @Override public long count() { return userDAO.count(); }
+    @Override
+    public List<UserDTO> getAll() {
+        return userDAO.findAll();
+    }
+
+    @Override
+    public Optional<UserDTO> getById(Long id) {
+        return userDAO.findById(id);
+    }
+
+    @Override
+    public Optional<UserDTO> getByEmail(String email) {
+        return userDAO.findByEmail(email);
+    }
+
+    @Override
+    public UserDTO create(UserDTO dto) {
+        encodePasswordIfPresent(dto);
+        return userDAO.save(dto);
+    }
+
+    @Override
+    public Optional<UserDTO> update(Long id, UserDTO dto) {
+        encodePasswordIfPresent(dto);
+        return userDAO.update(id, dto);
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        return userDAO.deleteById(id);
+    }
+
+    @Override
+    public long count() {
+        return userDAO.count();
+    }
 
     private void encodePasswordIfPresent(UserDTO dto) {
         if (dto.getPassword() != null && !dto.getPassword().isBlank()) {

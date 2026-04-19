@@ -6,6 +6,7 @@ import com.eam.demo.persistenceLayer.mapper.UserRolMapper;
 import com.eam.demo.persistenceLayer.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -68,6 +69,11 @@ public class UserRolDAO {
         return false;
     }
 
-    public boolean existsById(Long id) { return userRolRepository.existsById(id); }
-    public long count() { return userRolRepository.count(); }
+    public boolean existsById(Long id) {
+        return userRolRepository.existsById(id);
+    }
+
+    public long count() {
+        return userRolRepository.count();
+    }
 }
