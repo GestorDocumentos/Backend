@@ -14,7 +14,11 @@ import java.time.LocalDate;
 
 @Service
 public class PdfSubjectsGenerator {
-    private static final String DEFAULT_SIGNATURE = "Firma: Director Academico";
+    private final PdfSignatureRenderer signatureRenderer;
+
+    public PdfSubjectsGenerator(PdfSignatureRenderer signatureRenderer) {
+        this.signatureRenderer = signatureRenderer;
+    }
 
     public byte[] generate(UserReportDTO user) {
 
@@ -42,7 +46,7 @@ public class PdfSubjectsGenerator {
             document.add(table);
             document.add(new Paragraph(" "));
             document.add(new Paragraph("Fecha: " + LocalDate.now()));
-            document.add(new Paragraph(DEFAULT_SIGNATURE));
+            signatureRenderer.addSignature(document);
 
             document.close();
 

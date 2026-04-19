@@ -14,7 +14,11 @@ import java.io.ByteArrayOutputStream;
 
 @Service
 public class PdfGradesGenerator {
-    private static final String DEFAULT_SIGNATURE = "Firma: Director Academico";
+    private final PdfSignatureRenderer signatureRenderer;
+
+    public PdfGradesGenerator(PdfSignatureRenderer signatureRenderer) {
+        this.signatureRenderer = signatureRenderer;
+    }
 
     public byte[] generate(UserReportDTO user) {
 
@@ -39,8 +43,7 @@ public class PdfGradesGenerator {
             }
 
             document.add(table);
-            document.add(new Paragraph(" "));
-            document.add(new Paragraph(DEFAULT_SIGNATURE));
+            signatureRenderer.addSignature(document);
             document.close();
 
         } catch (Exception e) {
