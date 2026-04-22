@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class UserSubjectsEntity {
 
     @Id
-    private String id ;
+    private Long id ;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_user")
-    private UserEntity User;
+    private UserEntity user;
 
     @ManyToOne
     @JoinColumn(name = "id_subject")
